@@ -16,7 +16,15 @@ int __pkvm_register_hyp_panic_notifier(void (*cb)(struct user_pt_regs *));
 int __pkvm_register_unmask_serror(bool (*unmask)(void), void (*mask)(void));
 
 enum pkvm_psci_notification;
+#ifdef CONFIG_MODULES
 int __pkvm_register_psci_notifier(void (*cb)(enum pkvm_psci_notification, struct user_pt_regs *));
+#else
+static inline int
+__pkvm_register_psci_notifier(void (*cb)(enum pkvm_psci_notification, struct user_pt_regs *))
+{
+	return -EOPNOTSUPP;
+}
+#endif
 
 #ifdef CONFIG_MODULES
 int __pkvm_init_module(void *module_init);
@@ -28,7 +36,7 @@ static inline int __pkvm_init_module(void *module_init) { return -EOPNOTSUPP; }
 static inline int
 __pkvm_register_hcall(unsigned long hfn_hyp_va) { return -EOPNOTSUPP; }
 static inline int
-handle_host_dynamic_hcall(struct kvm_cpu_context *host_ctxt, int id)
+handle_host_dynamic_hcall(struct user_pt_regs *regs, int id)
 {
 	return HCALL_UNHANDLED;
 }

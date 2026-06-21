@@ -182,7 +182,9 @@ EXPORT_SYMBOL_GPL(gunyah_vm_function_register);
 void gunyah_vm_function_unregister(struct gunyah_vm_function *fn)
 {
 	/* Expecting unregister to only come when unloading a module */
+#ifdef CONFIG_MODULES
 	WARN_ON(fn->mod && module_refcount(fn->mod));
+#endif
 	xa_erase(&gunyah_vm_functions, fn->type);
 }
 EXPORT_SYMBOL_GPL(gunyah_vm_function_unregister);

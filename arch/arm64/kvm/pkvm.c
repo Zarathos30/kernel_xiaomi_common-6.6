@@ -529,8 +529,10 @@ static int __init finalize_pkvm(void)
 	 * Modules can play an essential part in the pKVM protection. All of
 	 * them must properly load to enable protected VMs.
 	 */
+#ifdef CONFIG_MODULES
 	if (pkvm_load_early_modules())
 		pkvm_firmware_rmem_clear();
+#endif
 
 	ret = kvm_iommu_init_driver();
 	if (ret) {
