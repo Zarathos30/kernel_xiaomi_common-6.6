@@ -8,7 +8,7 @@ DIST="dist"
 JOBS=$(nproc)
 OUT="out"
 LOG="build.log"
-CLANG_DIR="/home/zenin/clang"
+CLANG_DIR="$HOME/clang"
 CLANG_URL="https://github.com/XSans0/WeebX-Clang/releases/download/WeebX-Clang-19.1.5-release/WeebX-Clang-19.1.5.tar.gz"
 
 error() {
