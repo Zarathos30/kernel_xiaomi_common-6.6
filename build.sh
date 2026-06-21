@@ -2,7 +2,7 @@
 set -e
 
 ARCH=arm64
-CONFIG="gki_defconfig"
+CONFIG="onyx_defconfig"
 CROSS_COMPILE=aarch64-linux-gnu-
 DIST="dist"
 JOBS=$(nproc)
