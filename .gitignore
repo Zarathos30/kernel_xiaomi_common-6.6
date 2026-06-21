@@ -169,3 +169,11 @@ sphinx_*/
 
 # Rust analyzer configuration
 /rust-project.json
+
+# Build artifacts
+/dist/
+/out/
+/build.log
+*.zip
+anykernel/Image
+anykernel/modules/

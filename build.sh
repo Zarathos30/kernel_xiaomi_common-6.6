@@ -69,3 +69,18 @@ cp "$OUT/arch/arm64/boot/Image" "$DIST/kernel"
 [ -f "$OUT/vmlinux" ] && cp "$OUT/vmlinux" "$DIST/vmlinux"
 
 ok "Build successful: ./$DIST/kernel"
+
+info "Creating AnyKernel flashable zip"
+AK_DIR="anykernel"
+ZIP_NAME="GhostKernel-1.8V.zip"
+
+cp "$DIST/kernel" "$AK_DIR/Image"
+rm -rf "$AK_DIR/modules"
+mkdir -p "$AK_DIR/modules"
+find "$OUT" -name "*.ko" -exec cp {} "$AK_DIR/modules/" \;
+
+cd "$AK_DIR"
+zip -r9 "../$ZIP_NAME" * -x "*.git*" "README.md" > /dev/null
+cd ..
+
+ok "Flashable zip created: ./$ZIP_NAME"
