@@ -39,16 +39,8 @@ export CROSS_COMPILE=aarch64-linux-gnu-
 export CROSS_COMPILE_ARM32=arm-linux-gnueabi-
 export LD_LIBRARY_PATH="$CLANG_DIR/lib:$LD_LIBRARY_PATH"
 
-while true; do
-    printf "\033[1;34m[*] Clean build? (y/n): \033[0m"
-    read -r -n 1 REPLY
-    printf "\n"
-    case "$REPLY" in
-        [Yy]) info "Cleaning"; rm -rf "$DIST" "$OUT" "$LOG"; break ;;
-        [Nn]) rm -f "$LOG"; break ;;
-        *) printf "\033[1;31m    Use 'y' or 'n'.\033[0m\n" ;;
-    esac
-done
+info "Cleaning previous build artifacts"
+rm -rf "$DIST" "$OUT" "$LOG" anykernel/Image GhostKernel-1.8V.zip
 
 mkdir -p "$DIST" "$OUT"
 
