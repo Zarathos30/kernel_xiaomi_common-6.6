@@ -75,9 +75,6 @@ AK_DIR="anykernel"
 ZIP_NAME="GhostKernel-1.8V.zip"
 
 cp "$DIST/kernel" "$AK_DIR/Image"
-rm -rf "$AK_DIR/modules"
-mkdir -p "$AK_DIR/modules"
-find "$OUT" -name "*.ko" -exec cp {} "$AK_DIR/modules/" \;
 
 cd "$AK_DIR"
 zip -r9 "../$ZIP_NAME" * -x "*.git*" "README.md" > /dev/null
